@@ -10,9 +10,9 @@ registry
             let url = `/report/py3o/${action.report_name}`;
             const actionContext = action.context || {};
             if (
-                _.isUndefined(action.data) ||
-                _.isNull(action.data) ||
-                (_.isObject(action.data) && _.isEmpty(action.data))
+                action.data === "undefined"||
+                action.data == null ||
+                (_typeof(action.data) === 'object' && action.data !== null)
             ) {
                 // Build a query string with `action.data` (it's the place where reports
                 // using a wizard to customize the output traditionally put their options)

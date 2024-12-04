@@ -12,7 +12,7 @@ from unittest import mock
 
 import pkg_resources
 from PyPDF2 import PdfFileWriter
-from PyPDF2.pdf import PageObject
+from PyPDF2 import PageObject
 
 from odoo import tools
 from odoo.exceptions import ValidationError
@@ -45,7 +45,7 @@ def temporary_copy(path):
 
 class TestReportPy3o(TransactionCase):
     def setUp(self):
-        super(TestReportPy3o, self).setUp()
+        super().setUp()
         self.env.user.image_1920 = PNG
         self.report = self.env.ref("report_py3o.res_users_report_py3o")
         self.py3o_report = self.env["py3o.report"].create(
