@@ -33,7 +33,7 @@ except ImportError:
     logger.debug("Cannot import genshi.core")
 
 # Ensuring compatibility with PyPDF2 versions depending on the Python version
-PYTHON_VERSION = version.parse(sys.version)
+PYTHON_VERSION = version.parse(sys.version.split(' ')[0])
 
 # Conditional import based on Python version
 if PYTHON_VERSION <= version.parse("3.10"):
