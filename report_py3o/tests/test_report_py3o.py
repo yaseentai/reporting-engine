@@ -5,22 +5,15 @@ import base64
 import logging
 import os
 import shutil
+import sys
 import tempfile
 from base64 import b64decode, b64encode
 from contextlib import contextmanager
 from unittest import mock
+
+import pkg_resources
 from packaging import version
-import sys
-
-# Ensuring compatibility with PyPDF2 versions depending on the Python version
-PYTHON_VERSION = version.parse(sys.version)
-
-# Conditional import based on Python version
-if PYTHON_VERSION <= version.parse("3.10"):
-    from PyPDF2.pdf import PageObject
-else:
-    from PyPDF2 import PageObject
-
+from PyPDF2 import PdfFileWriter
 
 from odoo import tools
 from odoo.exceptions import ValidationError
@@ -38,6 +31,15 @@ try:
     from genshi.core import Markup
 except ImportError:
     logger.debug("Cannot import genshi.core")
+
+# Ensuring compatibility with PyPDF2 versions depending on the Python version
+PYTHON_VERSION = version.parse(sys.version)
+
+# Conditional import based on Python version
+if PYTHON_VERSION <= version.parse("3.10"):
+    from PyPDF2.pdf import PageObject
+else:
+    from PyPDF2 import PageObject
 
 
 @contextmanager
