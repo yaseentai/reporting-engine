@@ -9,10 +9,18 @@ import tempfile
 from base64 import b64decode, b64encode
 from contextlib import contextmanager
 from unittest import mock
+from packaging import version
+import sys
 
-import pkg_resources
-from PyPDF2 import PdfFileWriter
-from PyPDF2 import PageObject
+# Ensuring compatibility with PyPDF2 versions depending on the Python version
+PYTHON_VERSION = version.parse(sys.version)
+
+# Conditional import based on Python version
+if PYTHON_VERSION <= version.parse("3.10"):
+    from PyPDF2.pdf import PageObject
+else:
+    from PyPDF2 import PageObject
+
 
 from odoo import tools
 from odoo.exceptions import ValidationError
